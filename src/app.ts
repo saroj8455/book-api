@@ -1,19 +1,19 @@
-import express from 'express';
-import * as dotenv from 'dotenv';
+import express,{Express} from 'express';
 import helmet from 'helmet';
 import routes from './routes';
 import Home from './controllers/home.controller';
 import CONNECT from './config/connect';
+import * as dotenv from 'dotenv';
 
 // Config ENV
 dotenv.config();
 
-const app = express();
+const app:Express = express();
 // Hide header Information
 app.use(helmet());
 
 app.use(express.json());
-const PORT = process.env.PORT || 3000;
+
 
 // DB Config
 CONNECT();
@@ -36,6 +36,4 @@ app.post('/api/v1', (req, res) => {
 // Call Route
 routes(app);
 
-app.listen(PORT, () => {
-  console.log(`Server is running under http://localhost:${PORT}`);
-});
+export default app;
