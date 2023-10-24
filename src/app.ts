@@ -1,19 +1,19 @@
-import express,{Express} from 'express';
+import express, { Express } from 'express';
 import helmet from 'helmet';
 import routes from './routes';
 import Home from './controllers/home.controller';
 import CONNECT from './config/connect';
 import * as dotenv from 'dotenv';
+import laptopRoute from './routes/laptop.route';
 
 // Config ENV
 dotenv.config();
 
-const app:Express = express();
+const app: Express = express();
 // Hide header Information
 app.use(helmet());
 
 app.use(express.json());
-
 
 // DB Config
 CONNECT();
@@ -23,7 +23,7 @@ CONNECT();
 // });
 
 // By Home class
-app.get("/",Home.displayHomePage);
+app.get('/', Home.displayHomePage);
 
 app.post('/api/v1', (req, res) => {
   const data = req.body;
@@ -32,6 +32,9 @@ app.post('/api/v1', (req, res) => {
     data,
   });
 });
+
+// Config Laptop Route
+app.use('/api/laptop',laptopRoute);
 
 // Call Route
 routes(app);
