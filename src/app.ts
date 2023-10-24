@@ -3,6 +3,7 @@ import * as dotenv from 'dotenv';
 import helmet from 'helmet';
 import routes from './routes';
 import Home from './controllers/home.controller';
+import CONNECT from './config/connect';
 
 // Config ENV
 dotenv.config();
@@ -13,6 +14,9 @@ app.use(helmet());
 
 app.use(express.json());
 const PORT = process.env.PORT || 3000;
+
+// DB Config
+CONNECT();
 
 // app.get('/', (req, res) => {
 //   return res.send('Hello World App');
